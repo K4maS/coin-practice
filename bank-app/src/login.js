@@ -57,7 +57,7 @@ export default function createAuthorization(router) {
 }
 
 function inputValidation(input, e) {
-  console.log(e)
+  // console.log(e)
   let id = null;
   if (e.target.id === 'login') {
     id = 0;
@@ -77,6 +77,16 @@ function inputValidation(input, e) {
 }
 
 function authorizeRequest(login, password) {
-  fetch(URL + `/login?login=${login}&password=${password}`)
-    .then(res => { console.log(res) })
+  fetch(URL + `/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+    },
+    body: {
+      login,
+      password,
+    }
+
+  })
+    .then((response) => { console.log(response) })
 }
