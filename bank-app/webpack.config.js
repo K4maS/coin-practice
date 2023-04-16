@@ -4,7 +4,7 @@ const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
 // eslint-disable-next-line no-undef
 module.exports = (env) => ({
-  entry: './src/index.js',
+  entry: './src/js/index.js',
   output: {
     filename: 'main.[contenthash].js',
     // publicPath нужен чтобы одностраничное приложение работало корректно, чтобы все ссылки были со из слеша в начале
