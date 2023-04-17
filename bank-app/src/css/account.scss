@@ -24,7 +24,7 @@
 
   &__id {
     margin-bottom: 0;
-   font-family: 'Work Sans', 'Roboto', 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Work Sans', 'Roboto', 'Open Sans', 'Helvetica Neue', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 34px;
@@ -35,7 +35,7 @@
     padding-left: 50px;
 
     &-block {
-     font-family: 'Work Sans', 'Roboto', 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-family: 'Work Sans', 'Roboto', 'Open Sans', 'Helvetica Neue', sans-serif;
       font-style: normal;
 
       font-size: 20px;
@@ -79,7 +79,7 @@
         margin-bottom: 0;
         margin-right: 18px;
         text-align: end;
-        font-family: 'Ubuntu';
+        font-family: 'Ubuntu','Roboto' , 'Open Sans', 'Helvetica Neue', sans-serif;
         font-style: normal;
         font-weight: 500;
         font-size: 16px;
@@ -99,7 +99,7 @@
       ul {
         margin-bottom: 0;
         text-align: center;
-        font-family: 'Ubuntu';
+        font-family: 'Ubuntu','Roboto' , 'Open Sans', 'Helvetica Neue', sans-serif;
         font-style: normal;
         font-weight: 500;
         font-size: 16px;
@@ -131,7 +131,7 @@
     }
 
     &__error {
-      font-family: 'Ubuntu';
+      font-family: 'Ubuntu','Roboto' , 'Open Sans', 'Helvetica Neue', sans-serif;
       font-style: normal;
       font-weight: 500;
       font-size: 16px;
@@ -141,6 +141,18 @@
       letter-spacing: -0.01em;
 
       color: #BA0000;
+    }
+    &__success {
+      font-family: 'Ubuntu','Roboto' , 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+
+      align-items: center;
+      letter-spacing: -0.01em;
+
+      color: #76CA66;
     }
 
   }
@@ -190,7 +202,7 @@
         text-align: center;
         bottom: -40px;
         position: absolute;
-       font-family: 'Work Sans', 'Roboto', 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-family: 'Work Sans', 'Roboto', 'Open Sans', 'Helvetica Neue', sans-serif;
         font-style: normal;
         font-weight: 700;
         font-size: 20px;
@@ -209,7 +221,7 @@
     &__min,
     &__max {
       margin: 0;
-     font-family: 'Work Sans', 'Roboto', 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-family: 'Work Sans', 'Roboto', 'Open Sans', 'Helvetica Neue', sans-serif;
       font-style: normal;
       font-weight: 500;
       font-size: 20px;
@@ -236,7 +248,7 @@
 
         max-width: 1229px;
 
-        font-family: 'Ubuntu';
+        font-family: 'Ubuntu','Roboto' , 'Open Sans', 'Helvetica Neue', sans-serif;
         font-style: normal;
         font-weight: 500;
         font-size: 20px;
@@ -260,7 +272,7 @@
 
       &__row {
         border-bottom: 2px solid rgba(0, 82, 255, 0.1);
-        font-family: 'Ubuntu';
+        font-family: 'Ubuntu','Roboto' , 'Open Sans', 'Helvetica Neue', sans-serif;
         font-style: normal;
         font-weight: 400;
         font-size: 16px;

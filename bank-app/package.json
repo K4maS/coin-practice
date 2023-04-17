@@ -45,8 +45,6 @@
     "jquery": "^3.6.4",
     "miss-plete": "^1.4.3",
     "popper.js": "^1.16.1",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
     "yandex-map-react": "^1.1.1"
   }
 }

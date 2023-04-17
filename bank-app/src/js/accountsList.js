@@ -45,7 +45,8 @@ function createTop(router, accountList) {
   const topBlock = el('div.accounts__top');
   const accountsTitle = el('h1.accounts__title.title', 'Ваши счета');
   const sort = el('select.accounts__sort.form-select',);
-  const createBtn = el('button.btn.btn-primary', "Создать новый счёт");
+  const spinner = el('span.spinner-border.spinner-border-sm', { role: 'status', 'aria-hidden': 'true', style: 'display: none' });
+  const createBtn = el('button.btn.btn-primary', spinner, "Создать новый счёт");
   const sortList = [
     { title: 'Сортировка', value: '' },
     { title: 'По номеру', value: 'number' },
@@ -67,7 +68,7 @@ function createTop(router, accountList) {
   });
 
 
-  // Сортировка списка при блюре выпадающего списка
+  // Сортировка списка при изменении данных выпадающего списка
   sort.addEventListener('change', function () {
     accountList.innerHTML = '';
     getAccounts(token)
@@ -119,14 +120,14 @@ function createTop(router, accountList) {
 
   // Действие при нажатии на кнопу добавления нового счета
   createBtn.addEventListener('click', () => {
-
+    // Добавление спиннера
+    spinner.style.display = '';
     createAccount(token).then(res => {
-
-
-
       new AccountItem(router, document.querySelector('.accounts__list'), res.payload);
     }
     )
+      .catch((err) => { console.log(err) })
+      .finally(spinner.style.display = 'none')
   })
 
   setChildren(sort, options);

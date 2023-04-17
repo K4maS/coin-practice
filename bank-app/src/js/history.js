@@ -9,7 +9,7 @@ const token = localStorage.getItem('Token');
 
 // Сборка и вывод странциы
 export default function createHistory(router, id) {
-  const accountBlock = el('div.account');
+  const accountBlock = el('div.history');
   const spinner = el('span.spinner.spinner-border', {
     role: 'status', 'aria-hidden': 'true',
     style: { position: 'absolute', top: 'center', left: 'center' }
@@ -59,7 +59,7 @@ function createTopOfAccount(router, account) {
 
 function createBlocks(router, account) {
 
-  const mainBlock = el('.history__main', [account.balanceDynamics(router, 12), account.balanceDynamics(router, 12), account.history(router,)]);
+  const mainBlock = el('.history__main', [account.balanceDynamics(router, 12), account. transactionsRatio(router, 12), account.history(router,100)]);
 
   return mainBlock;
 }

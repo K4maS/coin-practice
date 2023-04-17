@@ -1,5 +1,5 @@
 .authorization {
-  height: calc(100vh - 100px);
+  height: calc(100vh - 300px);
   min-height: 415px;
   margin: 0 auto;
   max-width: 500px;
@@ -42,7 +42,7 @@
   }
 
   &__error {
-    font-family: 'Ubuntu';
+    font-family: 'Ubuntu', 'Roboto', 'Open Sans', 'Helvetica Neue', sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 16px;

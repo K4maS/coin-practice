@@ -14,13 +14,19 @@ export default function createAuthorization(router) {
 
   const authorizationLabelLogin = el('label.authorization__label.label');
   const lableTextLogin = el('span.authorization__label-text.label-text.form-label', 'Логин');
-  const authorizationInputLogin = el('input.authorization__input.input.form-control#login', { type: 'text', placeholder: 'Введите логин', value: 'developer' });
+  const authorizationInputLogin = el('input.authorization__input.input.form-control#login', {
+    type: 'text', placeholder: 'Введите логин',
+    value: 'developer'
+  });
 
   const authorizationLabelPassword = el('label.authorization__label.label');
   const lableTextPassword = el('span.authorization__label-text.label-text.form-label', 'Пароль');
-  const authorizationInputPassword = el('input.authorization__input.input.form-control#password', { type: 'password', placeholder: 'Введите пароль', value: 'skillbox' });
+  const authorizationInputPassword = el('input.authorization__input.input.form-control#password', {
+    type: 'password', placeholder: 'Введите пароль',
+    value: 'skillbox'
+  });
   const spinner = el('span.spinner-border.spinner-border-sm', { role: 'status', 'aria-hidden': 'true', style: 'display: none' });
-  const btn = el('button.btn.btn-primary.disabled', spinner, "Войти");
+  const btn = el('button.btn.btn-primary', spinner, "Войти");
   const errorMessage = el('p.authorization__error');
 
 
@@ -44,7 +50,11 @@ export default function createAuthorization(router) {
     })
 
   })
-
+  if (!authorizationInputLogin.value || !authorizationInputPassword.value) {
+    btn.classList.add('disabled');
+  } else {
+    btn.classList.remove('disabled');
+  };
   // При нажатии на кнопку:
   btn.addEventListener('click', (event) => {
     // setAttr(spinner, { style: { display: '' } });

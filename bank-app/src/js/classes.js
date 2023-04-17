@@ -79,17 +79,70 @@ export class Account {
   set lastQuantityMonthsBalanceDynamic(num) {
 
     let balanceDynamics = [];
+    let negTransactionsArr = [];
 
-    balanceDynamics.push(this.balance);
+
+    // balanceDynamics.push(this.balance);
+
+
     let thisYear = Number(new Date().getFullYear());
     let thisMonth = Number(new Date().getMonth()) + 1;
 
     let dates = [];
-    let date = monthTransformToText(thisMonth)
-    dates.push(date);
 
-    for (let i = 1; i < num; i++) {
+    // let date = monthTransformToText(thisMonth)
+    // dates.push(date);
 
+    for (let i = 0; i < num; i++) {
+
+
+
+      // Пишем дату в список
+      let date = monthTransformToText(thisMonth)
+      dates.push(date);
+      let fullDate = String(thisYear) + '-' + String(String(thisMonth).length === 1 ? '0' + String(thisMonth) : thisMonth);
+      let lastBalance = 0;
+      let negTransactions = 0;
+      // Вычисляем баланс месяца
+      if (lastBalance !== 0) {
+        lastBalance = balanceDynamics[balanceDynamics.length - 1];
+
+      } else {
+        this.transactions.forEach(elem => {
+          if (elem.date.startsWith(fullDate)) {
+            lastBalance += Number(elem.amount);
+            if (elem.to !== this.accountId) {
+              negTransactions += Number(elem.amount);
+
+            }
+          }
+        })
+      }
+      negTransactionsArr.push(negTransactions)
+
+
+      let lastMonthTransactionsSum = 0;
+      let monthTransactions = [];
+
+
+
+
+      this.transactions.forEach(elem => {
+        if (elem.date.startsWith(fullDate)) monthTransactions.push(elem);
+      })
+
+      monthTransactions.forEach(elem => {
+        // console.log('elem.from', elem.from, 'this.accountId', this.accountId)
+        if (elem.to === this.accountId) {
+          lastMonthTransactionsSum += Number(elem.amount);
+        } else {
+          lastMonthTransactionsSum -= Number(elem.amount);
+          negTransactions += Number(elem.amount);
+        }
+      }
+      )
+
+      balanceDynamics.push(Number(lastBalance) - (Number(lastBalance) - lastMonthTransactionsSum))
 
       // Понижаем на 1 месяц
       if (thisMonth === 1) {
@@ -99,54 +152,37 @@ export class Account {
       else {
         thisMonth = thisMonth - 1;
       }
-      // Пишем дату в список
-      let date = monthTransformToText(thisMonth)
-      dates.push(date);
 
-      // Вычисляем баланс месяца
-      let lastBalance = balanceDynamics[balanceDynamics.length - 1];
-      let lastMonthTransactionsSum = 0;
-      let monthTransactions = [];
-      let fullDate = String(thisYear) + '-' + String(String(thisMonth).length === 1 ? '0' + String(thisMonth) : thisMonth);
-      this.transactions.forEach(elem => {
-        if (elem.date.startsWith(fullDate)) monthTransactions.push(elem);
-      })
-
-      monthTransactions.forEach(elem => {
-        // console.log('elem.from', elem.from, 'this.accountId', this.accountId)
-        if (elem.to === this.accountId) {
-          lastMonthTransactionsSum += Number(elem.amount)
-        } else {
-          lastMonthTransactionsSum -= Number(elem.amount)
-        }
-      }
-      )
-
-      balanceDynamics.push(Number(lastBalance) - (Number(lastBalance) - lastMonthTransactionsSum))
     }
 
-
-    // balanceDynamics.reverse();
     let heightsArr = [];
     let max = 0;
+    let maxId = -1;
+    let maxOfMax;
     balanceDynamics.forEach(elem => {
+      maxId += 1;
       if (elem > max) {
         max = Math.round(elem);
+        maxOfMax = Math.max(balanceDynamics[maxId], negTransactionsArr[maxId]);
       }
     })
+
 
     let percent = max / 100;
     for (let i in balanceDynamics) {
       heightsArr.push(
         {
           month: dates[i] === 'мая' ? dates[i] = 'май' : dates[i].slice(0, 3),
-          height: (balanceDynamics[i] / percent)
+
+          height: (balanceDynamics[i] / percent),
+
+          heightNegative: ((negTransactionsArr[i] / (balanceDynamics[i] + negTransactionsArr[i])) * 100),
         }
       )
     }
+    console.log('negTransactionsArr', negTransactionsArr)
 
-
-    this._lastQuantityMonthsBalanceDynamic = { heightsArr, max };
+    this._lastQuantityMonthsBalanceDynamic = { heightsArr, max, maxOfMax };
   }
 
   // Блок переводов
@@ -184,8 +220,8 @@ export class Account {
     const spinner = el('span.spinner-border.spinner-border-sm', { role: 'status', 'aria-hidden': 'true', style: 'display: none' });
     const btn = el('button.btn.btn-primary', spinner, "Отправить");
     const errorMessage = el('p.transfer__error', '');
-
-    const accountTransfer = el('.account__transfer.transfer', [transfrTitle, transferLabelRecipient, transferLabelSum, btn, errorMessage]);
+    const successMessage = el('p.transfer__success', { style: 'display: none' }, 'Перевод выполнен успещно!');
+    const accountTransfer = el('.transfer', [transfrTitle, transferLabelRecipient, transferLabelSum, btn, errorMessage, successMessage]);
 
     // Валидация инпутов
     [transferChooseRecipient, transferInputSum].forEach(input => {
@@ -238,16 +274,19 @@ export class Account {
                 };
 
               }
-            }
 
+            }
+            let successMessage = document.querySelector('.transfer__success');
+            successMessage.style.display = '';
+            setTimeout(() => { successMessage.style.display = 'none'; }, 5000);
           })
           .catch(err => {
-
+            console.log(err)
           });
+
       }
 
-
-
+      setTimeout(() => { errorMessage.innerHTML = ''; }, 10000);
     })
 
     return accountTransfer;
@@ -278,16 +317,58 @@ export class Account {
       [el('ul.balance__list', [diogrammList]), minmaxBlock,]
     )
 
+    const href = `${balanceHistoryAddress}/${this.accountId}`;
 
     const linkToHistory = el('a.balance__link.link-to-histry', {
-      href: balanceHistoryAddress + '/' + this.accountId,
+      // Ссылка по данному хрефу не работало, поэтому создал сонстанту выше ссылки
+      href: href,
       onclick(event) {
-        // event.preventDefault();
-        router.navigate(event.target.getAttribute('href'));
+        event.preventDefault();
+        router.navigate(href);
       },
     }, [balanceTitle, balanceMainBlock])
 
-    const accountBalanceDynamic = el('.account__balance-dynamic.balance-dynamic.balance', linkToHistory);
+    const accountBalanceDynamic = el('.balance-dynamic.balance', linkToHistory);
+    return accountBalanceDynamic;
+  }
+  // Блок соотношения входящего и исходящего балансов
+  transactionsRatio(router, months = 6) {
+
+    // Количество месяцев для выведения в диограмме
+    this.lastQuantityMonthsBalanceDynamic = months;
+
+    // Прорисовка диограммы
+    const balanceTitle = el('h2. transactions-ratio__title.sub-title', 'Соотношение входящих исходящих транзакций');
+    const maxSum = el('p.transactions-ratio__max', this.lastQuantityMonthsBalanceDynamic.max);
+    const maxOfMax = el('p.transactions-ratio__max-of-max', this.lastQuantityMonthsBalanceDynamic.maxOfMax);
+    const minSum = el('p.transactions-ratio__min', '0');
+    const minmaxBlock = el('.transactions-ratio__minmax', [maxSum, maxOfMax, minSum])
+    let diogrammList = [];
+    this.lastQuantityMonthsBalanceDynamic.heightsArr.forEach((elem) => {
+      let setHeight = elem.height;
+      console.log(elem.heightNegative)
+      const item = el('li.transactions-ratio__item.item', { style: { height: setHeight + '%' } }, el('.item__negative', { style: { height: elem.heightNegative + '%' } },), el('p.item__month', elem.month));
+
+      diogrammList.push(item);
+    }
+
+    )
+    const balanceMainBlock = el('.transactions-ratio__main-block',
+      [el('ul.transactions-ratio__list', [diogrammList]), minmaxBlock,]
+    )
+
+    const href = `${balanceHistoryAddress}/${this.accountId}`;
+
+    const linkToHistory = el('a.transactions-ratio__link.link-to-histry', {
+      // Ссылка по данному хрефу не работало, поэтому создал сонстанту выше ссылки
+      href: href,
+      onclick(event) {
+        event.preventDefault();
+        router.navigate(href);
+      },
+    }, [balanceTitle, balanceMainBlock])
+
+    const accountBalanceDynamic = el('.transactions-ratio-dynamic.transactions-ratio', linkToHistory);
     return accountBalanceDynamic;
   }
 
@@ -312,14 +393,15 @@ export class Account {
 
       createTabelRow(historyTable, elem, this.accountId)
     })
-
+    const href = `${balanceHistoryAddress}/${this.accountId}`;
     const linkToHistory = el('a.balance__link.link-to-histry', {
-      href: balanceHistoryAddress + '/' + this.accountId,
+      // Ссылка по данному хрефу не работало, поэтому создал сонстанту выше ссылки
+      href: href,
       onclick(event) {
         event.preventDefault();
 
 
-        router.navigate(event.target.getAttribute('href'));
+        router.navigate(href);
       },
     }, [historyTitle, historyTable])
 
@@ -374,7 +456,7 @@ export class AccountItem extends Account {
 }
 
 
-// Перевод чисел месяцев в словарные обозначени
+// Перевод индекса месяца в название
 function monthTransformToText(date) {
 
   switch (Number(date)) {
@@ -462,6 +544,7 @@ function inputValidation(input, e) {
   ) {
     input.classList.add('is-invalid');
     validated[id] = false;
+    setTimeout(() => { input.classList.remove('is-invalid'); }, 10000);
   }
   else {
     input.classList.remove('is-invalid');
