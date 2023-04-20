@@ -2,9 +2,9 @@ import { el, router, setChildren } from "redom";
 import { Account } from "./classes";
 import { currencyTransfer, getAccount } from './requests'
 import { accountAddress } from "./addresses";
+import BackArrow from '../assets/images/svg/back-arrow.svg';
+
 const token = localStorage.getItem('Token');
-
-
 
 
 // Сборка и вывод странциы
@@ -41,14 +41,12 @@ function createTopOfAccount(router, account) {
     onclick(event) {
       event.preventDefault();
       router.navigate(event.target.getAttribute('href'));
-      const btnsBtns = document.querySelectorAll('.nav__btn');
-      btnsBtns[1].classList.add('disabled');
     }
-  }, "Вернуться назад");
+  }, el('img', { src: BackArrow }), "Вернуться назад");
   let serviceBlock = el('.history__service', [accountTitle, createBtn]);
   let accountId = el('h3.history__id', `№ ${account.accountId}`);
   let accountBalanceText = el('span.history__balance-text', `Баланс`);
-  let accountBalance = el('span.history__balance', `${account.formattedBalance} ₽`);
+  let accountBalance = el('span.history__balance', account.formattedBalance);
   let balanceBlock = el('.history__balance-block', [accountBalanceText, accountBalance]);
   let mainInfoBlock = el('.history__main-info', [accountId, balanceBlock]);
 
@@ -59,7 +57,7 @@ function createTopOfAccount(router, account) {
 
 function createBlocks(router, account) {
 
-  const mainBlock = el('.history__main', [account.balanceDynamics(router, 12), account. transactionsRatio(router, 12), account.history(router,100)]);
+  const mainBlock = el('.history__main', [account.balanceDynamics(router, 12), account.transactionsRatio(router, 12), account.history(router, 100)]);
 
   return mainBlock;
 }

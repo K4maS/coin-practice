@@ -1,11 +1,15 @@
 @import "custom";
 @import "~bootstrap/scss/bootstrap";
-// @import 'choices';
+@import 'choices';
 @import "mixins.scss";
 @import "settings.scss";
 @import "header.scss";
 @import "authorization.scss";
 @import "cardList.scss";
 @import "account.scss";
-@import 'history'
+@import 'history';
+@import 'currencies';
+@import 'atms';
+@import 'media';
+
 

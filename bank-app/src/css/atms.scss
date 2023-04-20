@@ -1,0 +1,15 @@
+.atms {
+  &__top {
+    margin-bottom: 56px;
+  }
+
+  &__map {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 728px;
+    background-color: rgba(128, 128, 128, 0.15);
+    color: rgb(176, 176, 176);
+  }
+}

@@ -17,9 +17,13 @@
     "babel-jest": "^29.5.0",
     "babel-loader": "^9.1.2",
     "css-loader": "^6.7.3",
+    "del-cli": "^5.0.0",
     "eslint": "^8.38.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "favicons": "^7.1.2",
+    "favicons-webpack-plugin": "^6.0.0",
+    "file-url": "^4.0.0",
     "gifsicle": "^7.0.1",
     "html-webpack-plugin": "^5.5.0",
     "image-minimizer-webpack-plugin": "^3.8.2",
@@ -30,6 +34,8 @@
     "optipng": "^4.2.0",
     "prettier": "^2.8.7",
     "redom": "^3.29.1",
+    "rollup": "^2.79.1",
+    "rollup-plugin-babel": "^4.4.0",
     "sass": "^1.61.0",
     "sass-loader": "^13.2.2",
     "style-loader": "^3.3.2",
@@ -42,9 +48,12 @@
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^5.3.0-alpha3",
     "choices.js": "^10.2.0",
+    "google-maps": "^4.3.3",
     "jquery": "^3.6.4",
     "miss-plete": "^1.4.3",
     "popper.js": "^1.16.1",
-    "yandex-map-react": "^1.1.1"
+    "react": "^18.2.0",
+    "yandex-map-react": "^1.1.1",
+    "ymaps": "^0.2.1"
   }
 }

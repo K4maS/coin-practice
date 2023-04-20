@@ -15,14 +15,14 @@ export default function createAuthorization(router) {
   const authorizationLabelLogin = el('label.authorization__label.label');
   const lableTextLogin = el('span.authorization__label-text.label-text.form-label', 'Логин');
   const authorizationInputLogin = el('input.authorization__input.input.form-control#login', {
-    type: 'text', placeholder: 'Введите логин',
+    type: 'text', placeholder: 'User',
     value: 'developer'
   });
 
   const authorizationLabelPassword = el('label.authorization__label.label');
   const lableTextPassword = el('span.authorization__label-text.label-text.form-label', 'Пароль');
   const authorizationInputPassword = el('input.authorization__input.input.form-control#password', {
-    type: 'password', placeholder: 'Введите пароль',
+    type: 'password', placeholder: 'Password',
     value: 'skillbox'
   });
   const spinner = el('span.spinner-border.spinner-border-sm', { role: 'status', 'aria-hidden': 'true', style: 'display: none' });
@@ -98,7 +98,7 @@ export default function createAuthorization(router) {
         errorMessage.textContent = error;
 
       })
-      .finally(setAttr(spinner, { style: { display: 'none' } }));
+      .finally(() => { setAttr(spinner, { style: { display: 'none' } }) });
 
 
 

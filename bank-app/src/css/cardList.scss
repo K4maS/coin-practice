@@ -10,9 +10,30 @@
     margin-bottom: 0;
   }
 
-  &__sort {
+  &__sort,
+  .choices {
     width: 300px;
     margin-right: auto;
+
+    &__inner {
+      padding: 2px;
+    }
+
+    &__item,
+    {
+      font-family: 'Ubuntu';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+
+    }
+ &__item--choice {
+  .is-highlighted {background-color: A0C3FF !important;}
+ }
+    #choices--ep90-item-choice-4 {
+      display: none;
+    }
   }
 
   &__list {
@@ -20,6 +41,8 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 50px 70px;
   }
+
+
 
 
   .item {
@@ -34,7 +57,7 @@
 
     &__id {
       margin-bottom: 9px;
-      font-family: 'Roboto' , 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-family: 'Roboto', 'Open Sans', 'Helvetica Neue', sans-serif;
       font-style: normal;
       font-weight: 500;
       font-size: 18px;

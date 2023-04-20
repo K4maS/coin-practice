@@ -1,0 +1,226 @@
+.currency {
+  &__title {
+    margin-bottom: 56px;
+  }
+
+  .sub-title {
+    margin-bottom: 25px;
+  }
+
+  &__main {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr 3fr;
+    gap: 44px 49px;
+  }
+
+  .your-currencies {
+    min-height: 411px;
+    padding: 50px;
+    background: #FFFFFF;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+  }
+
+  .exchanging {
+    position: relative;
+    min-height: 273px;
+    padding: 50px;
+    background: #FFFFFF;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+
+    &__main {
+      display: flex;
+      gap: 25px;
+
+    }
+
+    &__inputs-block {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    &__input-top {
+      display: flex;
+      gap: 20px;
+    }
+
+    &__label {
+      display: flex;
+      align-items: center;
+
+      &-text {
+        margin-bottom: 0;
+        margin-right: 20px;
+      }
+    }
+
+    .choices {
+      width: 134px;
+      border: 1px solid #9CA3AF;
+      border-radius: 7px;
+
+      &__inner {}
+
+      &__list--dropdown {}
+
+      &__item {
+        padding-top: 0;
+        padding-right: unset;
+        width: 100%;
+      }
+    }
+
+    &__error {
+      position: absolute;
+      width: 80%;
+      text-align: center;
+      bottom: 10px;
+      font-family: 'Ubuntu', 'Roboto', 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      align-items: center;
+      letter-spacing: -0.01em;
+      color: #BA0000;
+    }
+
+    &__success {
+      position: absolute;
+      width: 80%;
+      text-align: center;
+      bottom: 10px;
+      font-family: 'Ubuntu', 'Roboto', 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      align-items: center;
+      letter-spacing: -0.01em;
+      color: #76CA66;
+    }
+  }
+
+
+
+  .currencies-courses {
+    grid-row: 2 span;
+    min-height: 728px;
+    padding: 50px;
+    background: #E5E5E5;
+    border-radius: 50px;
+
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 25px;
+  }
+
+  .item {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+
+    &__currency {
+      // Добавить
+      font-family: 'Work Sans';
+      margin-right: 10px;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 23px;
+      display: flex;
+      align-items: flex-end;
+      letter-spacing: 0.1em;
+
+      color: #000000;
+
+    }
+
+    &__dots {
+      width: 100%;
+      height: 12px;
+      margin-right: 10px;
+      border-bottom: dashed 1px #000;
+
+
+    }
+
+    &__dots-red {
+      width: 100%;
+      height: 12px;
+      margin-right: 10px;
+      border-bottom: dashed 1px;
+      border-color: #FD4E5D;
+    }
+
+    &__dots-green {
+      width: 100%;
+      height: 12px;
+      margin-right: 10px;
+      border-bottom: dashed 1px;
+      border-color: #76CA66;
+    }
+
+    &__value {
+      // изменить
+      margin-right: 15px;
+      font-family: 'Work Sans';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 23px;
+      display: flex;
+      align-items: flex-end;
+      letter-spacing: 0.1em;
+
+      color: #000000;
+
+    }
+
+    &__triange {
+      position: relative;
+      bottom: 3px;
+      width: 20px;
+      height: 20px;
+      border: 10px solid transparent;
+      /* Прозрачные границы */
+      border-bottom: 10px solid #76CA66;
+
+    }
+
+    &__triange-negative {
+      position: relative;
+      bottom: 3px;
+      width: 20px;
+      height: 20px;
+      border: 10px solid transparent;
+      border-bottom: 10px solid #FD4E5D;
+      transform: rotate(180deg);
+      bottom: -5px;
+
+
+    }
+
+    &__triange-unset {
+      position: relative;
+      background-color: rgba(128, 128, 128, 0.823);
+      bottom: 3px;
+      width: 20px;
+      height: 3px;
+      top: -1px;
+      border-radius: 1px;
+
+
+    }
+  }
+
+
+}

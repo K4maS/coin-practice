@@ -2,6 +2,7 @@ import { el, setChildren, setAttr } from 'redom';
 import { getAccounts, createAccount } from './requests'
 import { AccountItem } from './classes';
 import Choices from 'choices.js';
+import addingPlus from '../assets/images/svg/adding-plus.svg'
 const token = localStorage.getItem('Token');
 
 
@@ -24,7 +25,6 @@ export default function accountsList(router) {
   setChildren(accounts, container);
 
   setChildren(container, [createTop(router, accountList), accountList]);
-
   getAccounts(token)
     .then(res => {
       res.payload.forEach(item => {
@@ -35,7 +35,7 @@ export default function accountsList(router) {
     .catch(err => {
       console.log(err)
     })
-    .finally(setAttr(spinner, { style: { display: 'none' } }));
+    .finally(() => { spinner.style.display = 'none'; });
 
 
   return accounts;
@@ -45,8 +45,11 @@ function createTop(router, accountList) {
   const topBlock = el('div.accounts__top');
   const accountsTitle = el('h1.accounts__title.title', 'Ваши счета');
   const sort = el('select.accounts__sort.form-select',);
+  // const sort = document.createElement('select');
+
   const spinner = el('span.spinner-border.spinner-border-sm', { role: 'status', 'aria-hidden': 'true', style: 'display: none' });
-  const createBtn = el('button.btn.btn-primary', spinner, "Создать новый счёт");
+  const addingPlusImg = el('img', { src: addingPlus })
+  const createBtn = el('button.btn.btn-primary', spinner, addingPlusImg, "Создать новый счёт");
   const sortList = [
     { title: 'Сортировка', value: '' },
     { title: 'По номеру', value: 'number' },
@@ -64,7 +67,7 @@ function createTop(router, accountList) {
 
     options.push(option);
 
-    // let coiceSort = new Choices(sort);
+
   });
 
 
@@ -120,19 +123,58 @@ function createTop(router, accountList) {
 
   // Действие при нажатии на кнопу добавления нового счета
   createBtn.addEventListener('click', () => {
+
     // Добавление спиннера
     spinner.style.display = '';
+    addingPlusImg.style.display = 'none';
     createAccount(token).then(res => {
       new AccountItem(router, document.querySelector('.accounts__list'), res.payload);
+      createBtn.classList.add('btn-success');
+      createBtn.textContent = 'Новый счет создан';
+      setTimeout(() => {
+        createBtn.classList.add('btn-primary');
+        createBtn.classList.remove('btn-success');
+        createBtn.textContent = '';
+        createBtn.append(addingPlusImg);
+        createBtn.append(el('span', 'Создать новый счёт'));
+      }, 3000);
     }
     )
-      .catch((err) => { console.log(err) })
-      .finally(spinner.style.display = 'none')
+      .catch((err) => {
+        console.log(err)
+        createBtn.classList.add('btn-danger');
+        createBtn.textContent = 'Произошла ошибка';
+        setTimeout(() => {
+          createBtn.classList.add('btn-primary');
+          createBtn.classList.remove('btn-danger');
+          createBtn.textContent = '';
+          createBtn.append(addingPlusImg);
+          createBtn.append(el('span', 'Создать новый счёт'));
+        }, 3000);
+      })
+      .finally(() => {
+        spinner.style.display = 'none';
+        addingPlusImg.style.display = '';
+        createBtn.classList.remove('btn-primary');
+
+      })
   })
 
   setChildren(sort, options);
   setChildren(topBlock, [accountsTitle, sort, createBtn])
-
+  let coiceSort = new Choices(sort, {
+    itemSelectText: '',
+    searchEnabled: false,
+    placeholder: true,
+    placeholderValue: null,
+    searchPlaceholderValue: null,
+    prependValue: 'Сортировка',
+    appendValue: null,
+    renderSelectedChoices: 'auto',
+    loadingText: 'Загрузка...',
+    noResultsText: 'Результатов не найдено',
+    noChoicesText: 'Нет вариантов для выбора',
+  });
   return topBlock;
 }
 

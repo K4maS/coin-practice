@@ -95,6 +95,7 @@ body {
 }
 
 
+
 img {
   max-width: 100%;
 }
@@ -126,5 +127,71 @@ ul {
 }
 
 #app {
-  margin-bottom: 100px;
+  margin-bottom: 50px;
+}
+
+.container {
+  padding: 0;
+}
+
+.choices {
+  margin-bottom: 0;
+  height: 44px;
+  background: #FFFFFF;
+  border: 1px solid #116ACC;
+  border-radius: 7px;
+
+  &__inner {
+    background: #FFFFFF;
+  }
+
+
+
+  &__item {
+    padding: 3px 0 0 7px;
+
+    &:hover {
+      // background: #A0C3FF;
+    }
+  }
+
+  &::after {
+    right: 20px !important;
+  }
+}
+
+.btn {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 14px 21px;
+
+  border-radius: 7px;
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+
+  &-primary {
+    background: #116ACC;
+    &:hover {
+      background-color: #116bccc4;
+    }
+  }
+
+  &-light {
+    color: #116ACC;
+
+    &:disabled {
+      background: #A0C3FF;
+    }
+  }
+}
+
+.input {
+  height: 44px;
+  background: #FFFFFF;
+  border: 1px solid #9CA3AF;
+  border-radius: 7px;
 }

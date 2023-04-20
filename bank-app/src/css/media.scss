@@ -1,0 +1,32 @@
+@media (max-width: 1200px) {
+  .accounts {
+    &__list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .account {
+    &__main{
+      grid-template-columns: repeat(1, 1fr);
+    }
+    .history {
+      grid-column: 1;
+    }
+  }
+}
+
+@media (max-width:990px) {
+  .accounts {
+   &__top {
+    // flex-direction: column;
+    // align-items: flex-start;
+   }
+  }
+}
+
+@media (max-width: 768px) {
+  .accounts {
+    &__list {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+}

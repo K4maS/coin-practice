@@ -14,7 +14,7 @@ export class Account {
   _balance
   constructor(account) {
     this.account = account;
-    this._balance = this.account.balance;
+    this.balance = this.account.balance;
   }
 
   get accountId() { return this.account.account; }
@@ -31,10 +31,14 @@ export class Account {
 
   get transactions() { return this.account.transactions; }
 
+  // set formattedBalance(value) {
+
+  // }
+
   get formattedBalance() {
     let balance = String(this.balance);
     if (balance === '0') {
-      return '0';
+      return '0 ₽';
     }
 
     if (balance.includes('.')) {
@@ -52,7 +56,7 @@ export class Account {
       }
     }
     formatted = formatted.reverse().join('');
-    return formatted;
+    return `${formatted} ₽`;
   }
 
   set dateNum(num) {
@@ -132,7 +136,7 @@ export class Account {
       })
 
       monthTransactions.forEach(elem => {
-        // console.log('elem.from', elem.from, 'this.accountId', this.accountId)
+
         if (elem.to === this.accountId) {
           lastMonthTransactionsSum += Number(elem.amount);
         } else {
@@ -186,13 +190,13 @@ export class Account {
   }
 
   // Блок переводов
-  transaction() {
+  transaction(router) {
 
     const transfrTitle = el('h2.transfer__title.sub-title', 'Новый перевод');
 
     const lableTextRecipient = el('span.transfer__label-text.label-text.form-label', 'Номер счета получателся');
 
-    const transferChooseRecipient = el('input.transfer__to.form-control#to', { name: 'to', 'aria-label': "Счет получателя" });
+    const transferChooseRecipient = el('input.transfer__to.form-control#to', { name: 'to', placeholder: "00000000000000000000000000" });
     const transferChooseRecipientBlock = el('.transfer__to-block')
     let accountsList = JSON.parse(localStorage.getItem('accountsList'));
 
@@ -213,7 +217,7 @@ export class Account {
     const transferLabelRecipient = el('label.transfer__label.label', [lableTextRecipient, transferChooseRecipient]);
 
     const lableTextSum = el('span.transfer__label-text.label-text.form-label', 'Сумма перевода');
-    const transferInputSum = el('input.transfer__input.input.form-control#amount', { type: 'number', placeholder: '' });
+    const transferInputSum = el('input.transfer__input.input.form-control#amount', { type: 'number', placeholder: '0' });
     const transferLabelSum = el('label.transfer__label.label', [lableTextSum, transferInputSum]);
 
 
@@ -274,16 +278,26 @@ export class Account {
                 };
 
               }
+              let successMessage = document.querySelector('.transfer__success');
+              successMessage.style.display = '';
+              setTimeout(() => { successMessage.style.display = 'none'; }, 5000);
+              transferInputSum.value = '';
+
+              this.balance = elem.payload.balance;
+
+              document.querySelector('.account__balance').textContent = this.formattedBalance;
+              document.querySelector('.balance__max').textContent = this.balance;
+
+
 
             }
-            let successMessage = document.querySelector('.transfer__success');
-            successMessage.style.display = '';
-            setTimeout(() => { successMessage.style.display = 'none'; }, 5000);
+
+
+
           })
           .catch(err => {
             console.log(err)
           });
-
       }
 
       setTimeout(() => { errorMessage.innerHTML = ''; }, 10000);
@@ -303,7 +317,7 @@ export class Account {
     const balanceTitle = el('h2. balance__title.sub-title', 'Динамика баланса');
     const maxSum = el('p.balance__max', this.lastQuantityMonthsBalanceDynamic.max);
     const minSum = el('p.balance__min', '0');
-    const minmaxBlock = el('.balance__minmax', [maxSum, minSum])
+    const minmaxBlock = el('.balance__minmax.minmax', [maxSum, minSum])
     let diogrammList = [];
     this.lastQuantityMonthsBalanceDynamic.heightsArr.forEach((elem) => {
       let setHeight = elem.height;
@@ -342,7 +356,7 @@ export class Account {
     const maxSum = el('p.transactions-ratio__max', this.lastQuantityMonthsBalanceDynamic.max);
     const maxOfMax = el('p.transactions-ratio__max-of-max', this.lastQuantityMonthsBalanceDynamic.maxOfMax);
     const minSum = el('p.transactions-ratio__min', '0');
-    const minmaxBlock = el('.transactions-ratio__minmax', [maxSum, maxOfMax, minSum])
+    const minmaxBlock = el('.transactions-ratio__minmax.minmax', [maxSum, maxOfMax, minSum])
     let diogrammList = [];
     this.lastQuantityMonthsBalanceDynamic.heightsArr.forEach((elem) => {
       let setHeight = elem.height;
@@ -431,7 +445,7 @@ export class AccountItem extends Account {
   accoutnCard(router, container, account) {
 
     let accountId = el('h3.item__id', account.account);
-    let accountBalance = el('p.item__balance', `${this.formattedBalance} ₽`);
+    let accountBalance = el('p.item__balance', this.formattedBalance);
     let accountText = el('p.item__text', 'Последняя транзакция:');
     let accountDate = el('p.item__date', this.date);
     let openBtn = el('a.btn.btn-primary.item__btn', {

@@ -82,10 +82,16 @@ export async function currencyBuy(from, to, amount, token) {
 
 // Запрос на получение данных о геолокации банкоматов
 // Скорее всего нужно будет дороаботать
-export function getAtms() {
-  fetch(URL + '/banks').then(res => {
-    console.log('atms:', res)
-  })
+export async function getAtms(token) {
+  return await fetch(URL + '/banks', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Basic ${token}`,
+    },
+  },).then((data) =>
+    data.json()
+  );
 };
 
 
@@ -104,3 +110,33 @@ export async function getKnownCurrwncies() {
   );
 }
 
+// ### GET /currencies
+// Метод возвращает список валютных счетов текущего пользователя.
+// Отвечает объектом с информацией о балансах валютных счетов данного пользователя:
+export async function getMyCurrwncies(token) {
+  return await fetch(URL + '/currencies', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Basic ${token}`,
+    },
+  },).then((data) =>
+    data.json()
+  );
+}
+// ```js
+// {
+// 	"AUD": {
+// 		"amount": 22.16,
+// 		"code": "AUD"
+// 	},
+// 	"BTC": {
+// 		"amount": 3043.34,
+// 		"code": "BTC"
+// 	},
+// 	"BYR": {
+// 		"amount": 48.75,
+// 		"code": "BYR"
+// 	},
+// }
+// ```
