@@ -108,6 +108,7 @@ function createExchangeCurrencies() {
           setTimeout(() => { successMessage.style.display = 'none'; }, 5000);
           exchangingInputSum.value = '';
         }
+        setTimeout(() => { errorMessage.innerText = ''; }, 5000);
 
       })
 

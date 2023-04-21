@@ -3,6 +3,7 @@ import { accountAddress, balanceHistoryAddress } from './addresses';
 import { currencyTransfer } from './requests';
 import v8n from 'v8n';
 import MissPlete from 'miss-plete';
+import mailImg from '../assets/images/svg/mail.svg'
 
 const token = localStorage.getItem('Token');
 const validated = [false, false];
@@ -222,7 +223,8 @@ export class Account {
 
 
     const spinner = el('span.spinner-border.spinner-border-sm', { role: 'status', 'aria-hidden': 'true', style: 'display: none' });
-    const btn = el('button.btn.btn-primary', spinner, "Отправить");
+    const mailImgBlock = el('img', { src: mailImg })
+    const btn = el('button.btn.btn-primary', spinner, mailImgBlock, "Отправить");
     const errorMessage = el('p.transfer__error', '');
     const successMessage = el('p.transfer__success', { style: 'display: none' }, 'Перевод выполнен успещно!');
     const accountTransfer = el('.transfer', [transfrTitle, transferLabelRecipient, transferLabelSum, btn, errorMessage, successMessage]);
@@ -248,6 +250,8 @@ export class Account {
         return;
       }
       else {
+        spinner.style.display = '';
+        mailImgBlock.style.display = 'none';
         currencyTransfer(this.accountId, transferChooseRecipient.value, transferInputSum.value, token)
           .then(elem => {
             if (elem.error === `Invalid account from`) {
@@ -292,15 +296,19 @@ export class Account {
 
             }
 
-
-
+            setTimeout(() => { errorMessage.innerHTML = ''; }, 5000);
           })
           .catch(err => {
             console.log(err)
+          })
+          .finally(() => {
+            spinner.style.display = 'none';
+            mailImgBlock.style.display = '';
           });
+
       }
 
-      setTimeout(() => { errorMessage.innerHTML = ''; }, 10000);
+
     })
 
     return accountTransfer;

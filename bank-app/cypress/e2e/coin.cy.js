@@ -7,14 +7,15 @@ describe('example to-do app', () => {
     // cy.get('#login').type('developer');
     // cy.get('#password').type('skillbox');
     cy.get('button').click();
+    cy.wait(1000);
   })
 
   it('Открытие случайной карточки', () => {
-    // cy.get('.item').then((elem) => {
-    //   const accounts = [...elem];
-    //   const num = Math.round(Math.random() * accounts.length);
-    //   console.log(accounts[num])
-    //   cy.wrap(accounts[num]).click();
-    // });
+    cy.get('.item').then((elem) => {
+      const accounts = [...elem];
+      const num = Math.round(Math.random() * accounts.length);
+      console.log(accounts[num])
+      cy.wrap(accounts[num]).click();
+    });
   })
 })

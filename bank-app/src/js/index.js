@@ -12,6 +12,7 @@ import { accountAddress, accountsListAddress, atmAddress, balanceHistoryAddress,
 import createHistory from './history';
 
 
+
 const router = new Navigo('/');
 const app = el('div#app');
 
