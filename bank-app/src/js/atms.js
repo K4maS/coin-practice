@@ -39,26 +39,31 @@ function mapInit(container) {
 
       });
 
-      const myPlacemark = new ymaps.Placemark([55.8, 37.6]);
-      map.geoObjects.add(myPlacemark);
+      const myGeoObject = new ymaps.GeoObject({
+            geometry: {
+              type: "Point",
+              coordinates:[55.8, 37.8]
+            }
+          });
+      map.geoObjects.add(myGeoObject);
 
-      // getAtms(token).then(res => {
-      //   console.log(res.payload);
-      //   let coordinatesArr = res.payload;
-      //   let geoTagsArr = [];
-      //   coordinatesArr.forEach(element => {
-      //     geoTagsArr.push(new ymaps.GeoObject({
-      //       geometry: {
-      //         type: "Point",
-      //         coordinates: [element.lat, element.lon]
-      //       }
-      //     }));
+      getAtms(token).then(res => {
+        console.log(res.payload);
+        let coordinatesArr = res.payload;
+        let geoTagsArr = [];
+        coordinatesArr.forEach(element => {
+          geoTagsArr.push(new ymaps.GeoObject({
+            geometry: {
+              type: "Point",
+              coordinates: [element.lat, element.lon]
+            }
+          }));
 
-      //     map.geoObjects.add(geoTagsArr);
-      //   }
-      //   )
+          map.geoObjects.add(geoTagsArr);
+        }
+        )
 
-      // });
+      });
 
 
 
