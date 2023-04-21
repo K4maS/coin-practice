@@ -11,7 +11,6 @@ import createAccoutn from './account';
 import { accountAddress, accountsListAddress, atmAddress, balanceHistoryAddress, currencyAddress } from './addresses';
 import createHistory from './history';
 
-const token = localStorage.getItem('Token');
 
 const router = new Navigo('/');
 const app = el('div#app');

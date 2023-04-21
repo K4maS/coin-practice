@@ -94,7 +94,7 @@ module.exports = (env) => ({
     new MiniCssExtractPlagin({
       filename: 'main.[contenthash].css',
     }),
-    new FaviconsWebpackPlugin('./src/assets/images/fav.png'),
+    new FaviconsWebpackPlugin('./src/assets/images/favicon.ico'),
   ],
   // настройки сервера
   devServer: {

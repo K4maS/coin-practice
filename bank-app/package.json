@@ -7,7 +7,8 @@
     "dev": "webpack serve --mode=development ",
     "lint": "eslint ./",
     "lint:fix": "eslint ./ --fix",
-    "test": "jest"
+    "test:jest": "jest",
+    "test": "cypress open"
   },
   "author": "Sultanov Kamil",
   "devDependencies": {
@@ -17,6 +18,7 @@
     "babel-jest": "^29.5.0",
     "babel-loader": "^9.1.2",
     "css-loader": "^6.7.3",
+    "cypress": "^12.10.0",
     "del-cli": "^5.0.0",
     "eslint": "^8.38.0",
     "eslint-config-prettier": "^8.8.0",
@@ -48,12 +50,8 @@
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^5.3.0-alpha3",
     "choices.js": "^10.2.0",
-    "google-maps": "^4.3.3",
-    "jquery": "^3.6.4",
     "miss-plete": "^1.4.3",
     "popper.js": "^1.16.1",
-    "react": "^18.2.0",
-    "yandex-map-react": "^1.1.1",
     "ymaps": "^0.2.1"
   }
 }
