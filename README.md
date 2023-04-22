@@ -17,16 +17,16 @@
 -В разделе "Банкоматы" имеется крата с геотегами банкоматов;
 
 ## Комманды в (репазитории bank-app):
- - Сборка репазитория - npm run build;
- - DEV сборка  репазитория, вместе с DEV-сервером - npm run dev;
+ - Сборка репазитория - `npm run build`;
+ - DEV сборка  репазитория, вместе с DEV-сервером - `npm run dev`;
  - Запуск cypress B2B тестов:
-  - npm run test;
-  - Открыть тест coin.cy.js
+  - `npm run test`;
+  - Открыть тест `coin.cy.js`;
   Для работы теста необходимо запустить backend-сервер и cервер с самим сайтом(DEV-сборку);
- - Запуск тестов jest - npm run test:jest;
- - Запуск eslint - npm run lint;
- - Запуск eslint в режиме исправлеия - npm run lint:fix.
+ - Запуск тестов jest - `npm run test:jest`;
+ - Запуск eslint - `npm run lint`;
+ - Запуск eslint в режиме исправлеия - `npm run lint:fix`.
 
 ## Запуск backend-сервера (в репазитории project):
-  - Запуск сервера: npm start.
+  - Запуск сервера - `npm start`.
 
