@@ -47,7 +47,7 @@ function createTopOfAccount(router, account) {
       const btnsBtns = document.querySelectorAll('.nav__btn');
       btnsBtns[1].classList.add('disabled');
     }
-  }, el('img',{ src: BackArrow }), "Вернуться назад");
+  }, el('img', { src: BackArrow }), "Вернуться назад");
   let serviceBlock = el('.account__service', [accountTitle, createBtn]);
   let accountId = el('h3.account__id', `№ ${account.accountId}`);
   let accountBalanceText = el('span.account__balance-text', `Баланс`);
@@ -60,6 +60,7 @@ function createTopOfAccount(router, account) {
   return topBlock;
 }
 
+// Создание блоков транзакции и статистики с историей
 function createBlocks(router, account) {
 
   const mainBlock = el('.account__main', [account.transaction(router), account.balanceDynamics(router), account.history(router)]);

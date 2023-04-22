@@ -19,23 +19,16 @@ export class Account {
   }
 
   get accountId() { return this.account.account; }
-
   get balance() {
     return this._balance;
   }
-
   set balance(value) {
     this._balance = value;
   }
-
   get mine() { return this.account.mine; }
-
   get transactions() { return this.account.transactions; }
 
-  // set formattedBalance(value) {
-
-  // }
-
+  // Форматирование остатка по счету
   get formattedBalance() {
     let balance = String(this.balance);
     if (balance === '0') {
@@ -81,25 +74,18 @@ export class Account {
     return this._lastQuantityMonthsBalanceDynamic
   }
 
+  // Создание статистики по динамике счета
   set lastQuantityMonthsBalanceDynamic(num) {
 
     let balanceDynamics = [];
     let negTransactionsArr = [];
-
-
-    // balanceDynamics.push(this.balance);
-
 
     let thisYear = Number(new Date().getFullYear());
     let thisMonth = Number(new Date().getMonth()) + 1;
 
     let dates = [];
 
-    // let date = monthTransformToText(thisMonth)
-    // dates.push(date);
-
     for (let i = 0; i < num; i++) {
-
 
 
       // Пишем дату в список
@@ -125,12 +111,8 @@ export class Account {
       }
       negTransactionsArr.push(negTransactions)
 
-
       let lastMonthTransactionsSum = 0;
       let monthTransactions = [];
-
-
-
 
       this.transactions.forEach(elem => {
         if (elem.date.startsWith(fullDate)) monthTransactions.push(elem);
@@ -172,7 +154,6 @@ export class Account {
       }
     })
 
-
     let percent = max / 100;
     for (let i in balanceDynamics) {
       heightsArr.push(
@@ -190,8 +171,8 @@ export class Account {
     this._lastQuantityMonthsBalanceDynamic = { heightsArr, max, maxOfMax };
   }
 
-  // Блок переводов
-  transaction(router) {
+  //Создание блока с переводами со счета на счет
+  transaction() {
 
     const transfrTitle = el('h2.transfer__title.sub-title', 'Новый перевод');
 
@@ -224,7 +205,7 @@ export class Account {
 
     const spinner = el('span.spinner-border.spinner-border-sm', { role: 'status', 'aria-hidden': 'true', style: 'display: none' });
     const mailImgBlock = el('img', { src: mailImg })
-    const btn = el('button.btn.btn-primary', spinner, mailImgBlock, "Отправить");
+    const btn = el('button.btn.btn-primary#send', spinner, mailImgBlock, "Отправить");
     const errorMessage = el('p.transfer__error', '');
     const successMessage = el('p.transfer__success', { style: 'display: none' }, 'Перевод выполнен успещно!');
     const accountTransfer = el('.transfer', [transfrTitle, transferLabelRecipient, transferLabelSum, btn, errorMessage, successMessage]);
@@ -315,7 +296,7 @@ export class Account {
 
   }
 
-  // Блок динамики баланса
+  //Создание блока динамики баланса
   balanceDynamics(router, months = 6) {
 
     // Количество месяцев для выведения в диограмме
@@ -353,7 +334,7 @@ export class Account {
     const accountBalanceDynamic = el('.balance-dynamic.balance', linkToHistory);
     return accountBalanceDynamic;
   }
-  // Блок соотношения входящего и исходящего балансов
+  // Создание блока соотношения входящего и исходящего балансов
   transactionsRatio(router, months = 6) {
 
     // Количество месяцев для выведения в диограмме
@@ -382,6 +363,7 @@ export class Account {
     const href = `${balanceHistoryAddress}/${this.accountId}`;
 
     const linkToHistory = el('a.transactions-ratio__link.link-to-histry', {
+
       // Ссылка по данному хрефу не работало, поэтому создал сонстанту выше ссылки
       href: href,
       onclick(event) {
@@ -394,7 +376,7 @@ export class Account {
     return accountBalanceDynamic;
   }
 
-  // История переводов
+  // Создание блока истории переводов
   history(router, rows = 10) {
 
     // Прорисовка таблицы
@@ -456,7 +438,7 @@ export class AccountItem extends Account {
     let accountBalance = el('p.item__balance', this.formattedBalance);
     let accountText = el('p.item__text', 'Последняя транзакция:');
     let accountDate = el('p.item__date', this.date);
-    let openBtn = el('a.btn.btn-primary.item__btn', {
+    let openBtn = el('a.btn.btn-primary.item__btn.open-card', {
       href: `${accountAddress}/${account.account}`,
       onclick(event) {
         event.preventDefault();
@@ -478,7 +460,7 @@ export class AccountItem extends Account {
 }
 
 
-// Перевод индекса месяца в название
+// Перевод индекса месяца в название месяца
 function monthTransformToText(date) {
 
   switch (Number(date)) {
@@ -523,6 +505,7 @@ function monthTransformToText(date) {
   return date
 }
 
+// Создание строки таблицы для истории транзакций
 function createTabelRow(historyTable, elem, accountId, first = false) {
   let fontСolor = '#000000';
   let positivity = '';

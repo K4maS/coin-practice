@@ -19,18 +19,21 @@
       padding: 2px;
     }
 
-    &__item,
-    {
-      font-family: 'Ubuntu';
+    &__item {
+      font-family: 'Ubuntu', 'Roboto', 'Open Sans', 'Helvetica Neue', sans-serif;
       font-style: normal;
       font-weight: 400;
       font-size: 16px;
       line-height: 24px;
 
     }
- &__item--choice {
-  .is-highlighted {background-color: A0C3FF !important;}
- }
+
+    &__item--choice {
+      .is-highlighted {
+        background-color: A0C3FF !important;
+      }
+    }
+
     #choices--ep90-item-choice-4 {
       display: none;
     }

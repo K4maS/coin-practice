@@ -5,6 +5,7 @@ import v8n from 'v8n';
 
 const token = localStorage.getItem('Token');
 
+// Основной блока прорисовки страницы
 export default function createСurrency() {
   const currency = el('div.currency');
   const container = el('div.container');
@@ -19,6 +20,7 @@ export default function createСurrency() {
   return currency;
 }
 
+// Создание блока с валютами владельца
 function createYourCurrencies() {
 
   const title = el('h2.your-currencies__title.sub-title', 'Ваши валюты');
@@ -28,18 +30,13 @@ function createYourCurrencies() {
 
   getMyCurrwncies(token).then(res => {
     creatingMyTokensList(list, res.payload);
-  }
-  )
-
-
-
-
+  })
 
   const yourCurencies = el('.your-currencies', [title, list]);
   return yourCurencies;
 }
 
-
+// Создание блока с обменом валют
 function createExchangeCurrencies() {
 
   const title = el('h2.exchanging__title.sub-title', 'Обмен валюты');
@@ -48,13 +45,10 @@ function createExchangeCurrencies() {
   const selectFrom = el('select.exchanging__select.form-select', { name: 'from' });
   const exchangingLabelFrom = el('label.exchanging__label.label', [lableTextFrom, selectFrom]);
 
-
   const lableTextTo = el('span.exchanging__label-text.label-text.form-label', 'В');
   const selectTo = el('select.exchanging__select.form-select', { name: 'to' });
   const exchangingLabelTo = el('label.exchanging__label.label', [lableTextTo, selectTo]);
 
-
-  // Нужно сделать валидацию
   const lableTextSum = el('span.exchanging__label-text.label-text.form-label', 'Сумма');
   const exchangingInputSum = el('input.exchanging__input.input.form-control#login', {
     type: 'number', placeholder: 'Введите cумму',
@@ -62,8 +56,7 @@ function createExchangeCurrencies() {
 
   const exchangingLabelSum = el('label.exchanging__label.label', [lableTextSum, exchangingInputSum]);
 
-  let btn = el('a.btn.btn-primary.item__btn', {
-  }, 'Обменять');
+  let btn = el('a.btn.btn-primary.item__btn', {}, 'Обменять');
   const inputTop = el('.exchanging__input-top', [exchangingLabelFrom, exchangingLabelTo]);
   const inputsBlock = el('.exchanging__inputs-block', [inputTop, exchangingLabelSum])
   const errorMessage = el('p.exchanging__error', '');
@@ -119,18 +112,12 @@ function createExchangeCurrencies() {
   return exchangeCurencies;
 }
 
-
+// Создание блока с изменениями курсов в реальном времени
 function createCurrenciesCourses() {
 
   const title = el('h2.currencies-courses__title.sub-title', 'Изменение курсов в реальном времени');
 
   const list = el('ul.currencies-courses__list.list');
-
-  // let placeholderList = [];
-  // for (let i; i <= 21; i++) {
-  //   placeholderList.push({ code: '1', amount: '1', })
-  // }
-  // creatingMyTokensList(list, placeholderList);
 
   getChangedCurrency().onmessage = res => {
     let response = JSON.parse(res.data);
@@ -220,7 +207,6 @@ function creatingMyTokensList(list, coins) {
       const dots = el('span.item__dots');
       const value = el('span.item__value', coins[key].amount);
       let itemList = [currencyName, dots, value];
-
 
       const item = el('li.currencies-courses__item.item', itemList);
 

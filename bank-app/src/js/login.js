@@ -23,7 +23,7 @@ export default function createAuthorization(router) {
   const lableTextPassword = el('span.authorization__label-text.label-text.form-label', 'Пароль');
   const authorizationInputPassword = el('input.authorization__input.input.form-control#password', {
     type: 'password', placeholder: 'Password',
-    value: 'skillbox'
+    value: 'qwerty'
   });
   const spinner = el('span.spinner-border.spinner-border-sm', { role: 'status', 'aria-hidden': 'true', style: 'display: none' });
   const btn = el('button.btn.btn-primary', spinner, "Войти");
@@ -55,6 +55,7 @@ export default function createAuthorization(router) {
   } else {
     btn.classList.remove('disabled');
   };
+
   // При нажатии на кнопку:
   btn.addEventListener('click', (event) => {
     // setAttr(spinner, { style: { display: '' } });
@@ -99,11 +100,6 @@ export default function createAuthorization(router) {
 
       })
       .finally(() => { setAttr(spinner, { style: { display: 'none' } }) });
-
-
-
-
-
 
   })
   return container;

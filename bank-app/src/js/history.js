@@ -55,6 +55,7 @@ function createTopOfAccount(router, account) {
   return topBlock;
 }
 
+// Создание основного блока со статистиками
 function createBlocks(router, account) {
 
   const mainBlock = el('.history__main', [account.balanceDynamics(router, 12), account.transactionsRatio(router, 12), account.history(router, 100)]);

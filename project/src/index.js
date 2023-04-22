@@ -20,7 +20,7 @@ const port = 3000
 
 const AUTH_DATA = Object.freeze({
 	login: 'developer',
-	password: 'skillbox',
+	password: 'qwerty',
 	token: 'ZGV2ZWxvcGVyOnNraWxsYm94'
 })
 

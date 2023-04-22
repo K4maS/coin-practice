@@ -56,14 +56,15 @@
     gap: 50px;
   }
 
-
-
-
   // История баланса
+  // убрал кликабельность и обводку фокуса с ссылки в историю(на этот блок)
+  .link-to-histry {
+    pointer-events: none;
 
-
-  // Убрал кликабельность, чтобы не переходилось по ссыклам
-  // pointer-events: none;
+    &:focus {
+      outline: none;
+    }
+  }
 
   .balance {
     width: 100%;
@@ -191,6 +192,7 @@
         font-size: 20px;
         line-height: 23px;
       }
+
       &__negative {
         width: 100%;
         max-height: 100%;
@@ -237,7 +239,7 @@
 
         max-width: 1229px;
 
-        font-family: 'Ubuntu','Roboto', 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-family: 'Ubuntu', 'Roboto', 'Open Sans', 'Helvetica Neue', sans-serif;
         font-style: normal;
         font-weight: 500;
         font-size: 20px;

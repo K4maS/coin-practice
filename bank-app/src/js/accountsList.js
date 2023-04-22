@@ -45,11 +45,10 @@ function createTop(router, accountList) {
   const topBlock = el('div.accounts__top');
   const accountsTitle = el('h1.accounts__title.title', 'Ваши счета');
   const sort = el('select.accounts__sort.form-select',);
-  // const sort = document.createElement('select');
 
   const spinner = el('span.spinner-border.spinner-border-sm', { role: 'status', 'aria-hidden': 'true', style: 'display: none' });
   const addingPlusImg = el('img', { src: addingPlus })
-  const createBtn = el('button.btn.btn-primary', spinner, addingPlusImg, "Создать новый счёт");
+  const createBtn = el('button.btn.btn-primary#createAccount', spinner, addingPlusImg, "Создать новый счёт");
   const sortList = [
     { title: 'Сортировка', value: '' },
     { title: 'По номеру', value: 'number' },
@@ -124,9 +123,10 @@ function createTop(router, accountList) {
   // Действие при нажатии на кнопу добавления нового счета
   createBtn.addEventListener('click', () => {
 
-    // Добавление спиннера
     spinner.style.display = '';
+
     addingPlusImg.style.display = 'none';
+
     createAccount(token).then(res => {
       new AccountItem(router, document.querySelector('.accounts__list'), res.payload);
       createBtn.classList.add('btn-success');
@@ -162,6 +162,8 @@ function createTop(router, accountList) {
 
   setChildren(sort, options);
   setChildren(topBlock, [accountsTitle, sort, createBtn])
+
+  // Насторойки выпадающего списка Choices
   let coiceSort = new Choices(sort, {
     itemSelectText: '',
     searchEnabled: false,

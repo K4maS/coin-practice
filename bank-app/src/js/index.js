@@ -12,7 +12,7 @@ import { accountAddress, accountsListAddress, atmAddress, balanceHistoryAddress,
 import createHistory from './history';
 
 
-
+// Инициализация навиго
 const router = new Navigo('/');
 const app = el('div#app');
 
@@ -20,52 +20,34 @@ const app = el('div#app');
 // Установка хедера
 setChildren(window.document.body, [createHeader(router), app]);
 
-// Переход между адресами
+// Переход на страницу авторизации(при открытии так же открывается этот блок)
 router.on('/', () => {
   setChildren(app, createAuthorization(router));
 })
 
-// if (!token) {
-//   router.on(atmAddress, () => {
-//     setChildren(app, createAuthorization(router));
-//   })
-
-//   router.on(accountsListAddress, () => {
-//     setChildren(app, createAuthorization(router));
-//   })
-
-//   router.on(currencyAddress, () => {
-//     setChildren(app, createAuthorization(router));
-//   })
-
-
-//   router.on(`${accountAddress}/:id`, ({ data: { id } }) => {
-//     setChildren(app, createAuthorization(router));
-//   });
-// }
-// else {
-router.on(atmAddress, () => {
-  setChildren(app, createAtms());
-})
-
+// Переход на страницу списка счетов
 router.on(accountsListAddress, () => {
   setChildren(app, accountsList(router));
 })
-
-router.on(currencyAddress, () => {
-  setChildren(app, createСurrency());
-})
-
-
+// Переход на страницу счета
 router.on(accountAddress + '/:id', ({ data: { id } }) => {
   setChildren(app, createAccoutn(router, id));
 });
+
+// Переход на страницу расширенной истории счета
 router.on(balanceHistoryAddress + '/:id', ({ data: { id } }) => {
   setChildren(app, createHistory(router, id));
 });
 // }
+// Переход на страницу валют
+router.on(currencyAddress, () => {
+  setChildren(app, createСurrency());
+})
 
-
+// Переход на страницу карты банкоматов
+router.on(atmAddress, () => {
+  setChildren(app, createAtms());
+})
 
 
 router.resolve();

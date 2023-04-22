@@ -1,3 +1,4 @@
+// Список адресов для перехода между страниами
 export const loginAddress = '/';
 export const accountsListAddress = '/accounts-list';
 export const accountAddress = '/account';

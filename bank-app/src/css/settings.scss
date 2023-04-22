@@ -167,7 +167,7 @@ ul {
   padding: 14px 21px;
 
   border-radius: 7px;
-  font-family: 'Ubuntu';
+  font-family: 'Ubuntu', 'Roboto', 'Open Sans', 'Helvetica Neue', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -175,6 +175,7 @@ ul {
 
   &-primary {
     background: #116ACC;
+
     &:hover {
       background-color: #116bccc4;
     }
@@ -185,6 +186,12 @@ ul {
 
     &:disabled {
       background: #A0C3FF;
+    }
+
+    &:hover,
+    &:active,
+    &:fucus {
+      color: #116ACC;
     }
   }
 }

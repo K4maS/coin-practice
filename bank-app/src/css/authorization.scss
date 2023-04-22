@@ -9,11 +9,12 @@
 
   &__form {
     position: relative;
-    padding: 50px 85px 50px 115px;
+    padding: 50px 85px 0 115px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
+    min-height: 366px;
     border-radius: 50px;
     background-color: #F3F4F6;
 
@@ -43,7 +44,6 @@
   }
 
   &__error {
-    position: absolute;
     font-family: 'Ubuntu', 'Roboto', 'Open Sans', 'Helvetica Neue', sans-serif;
     font-style: normal;
     font-weight: 500;

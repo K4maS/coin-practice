@@ -1,4 +1,6 @@
+// Адрес запроса
 const URL = 'http://localhost:3000';
+// Адрес запроса websocket
 const URL_WS = 'ws://localhost:3000';
 
 // Отправка запроса на авторизацию
@@ -81,7 +83,6 @@ export async function currencyBuy(from, to, amount, token) {
 }
 
 // Запрос на получение данных о геолокации банкоматов
-// Скорее всего нужно будет дороаботать
 export async function getAtms(token) {
   return await fetch(URL + '/banks', {
     method: 'GET',
@@ -94,24 +95,20 @@ export async function getAtms(token) {
   );
 };
 
-
-// Запрос будет выдавать сообщения об изменении курса обмена валют
+// Запрос websocket будет выдавать сообщения об изменении курса обмена валют
 export function getChangedCurrency() {
   return new WebSocket(URL_WS + '/currency-feed');
 }
 
-// отвечает массивом со списком кодов всех используемых бекэндом валют на данный момент, например:
-// ```js
-// [ 'ETH', 'BTC', 'USD' ]
-// ```
+//Запрос отвечает массивом со списком кодов всех используемых бекэндом валют на данный момент, например:
 export async function getKnownCurrwncies() {
   return await fetch(URL + '/all-currencies').then((data) =>
     data.json()
   );
 }
 
-// ### GET /currencies
-// Метод возвращает список валютных счетов текущего пользователя.
+
+// Запрос возвращает список валютных счетов текущего пользователя.
 // Отвечает объектом с информацией о балансах валютных счетов данного пользователя:
 export async function getMyCurrwncies(token) {
   return await fetch(URL + '/currencies', {
@@ -124,19 +121,3 @@ export async function getMyCurrwncies(token) {
     data.json()
   );
 }
-// ```js
-// {
-// 	"AUD": {
-// 		"amount": 22.16,
-// 		"code": "AUD"
-// 	},
-// 	"BTC": {
-// 		"amount": 3043.34,
-// 		"code": "BTC"
-// 	},
-// 	"BYR": {
-// 		"amount": 48.75,
-// 		"code": "BYR"
-// 	},
-// }
-// ```

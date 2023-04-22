@@ -1,5 +1,7 @@
 import { el, setChildren, setStyle } from 'redom';
-import { loginAddress,accountsListAddress ,currencyAddress, atmAddress } from './addresses';
+import { loginAddress, accountsListAddress, currencyAddress, atmAddress } from './addresses';
+
+// Создание хэдера
 export default function createHeader(router) {
   const header = el('header.header');
   const container = el('div.container');
@@ -11,12 +13,13 @@ export default function createHeader(router) {
 
   const btnList = [];
   const btnSettings = [
-    { title: 'Банкоматы', link: atmAddress},
-    { title: 'Счета', link: accountsListAddress},
-    { title: 'Валюта', link: currencyAddress},
+    { title: 'Банкоматы', link: atmAddress },
+    { title: 'Счета', link: accountsListAddress },
+    { title: 'Валюта', link: currencyAddress },
     { title: 'Выйти', link: loginAddress },
   ]
 
+  // Создание ссылок перехода между страницами
   btnSettings.forEach((elem) => {
     const btn = el('a.btn.btn-light.nav__btn', {
       href: elem.link,
