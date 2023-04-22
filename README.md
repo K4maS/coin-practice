@@ -20,9 +20,9 @@
  - Сборка репазитория - `npm run build`;
  - DEV сборка  репазитория, вместе с DEV-сервером - `npm run dev`;
  - Запуск cypress B2B тестов:
-  - `npm run test`;
-  - Открыть тест `coin.cy.js`;
- Для работы теста необходимо запустить backend-сервер и cервер с самим сайтом(DEV-сборку);
+   - `npm run test`;
+   - Открыть тест `coin.cy.js`;
+   Для работы теста необходимо запустить backend-сервер и cервер с самим сайтом(DEV-сборку);
  - Запуск тестов jest - `npm run test:jest`;
  - Запуск eslint - `npm run lint`;
  - Запуск eslint в режиме исправлеия - `npm run lint:fix`.
