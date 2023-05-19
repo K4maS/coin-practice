@@ -13,8 +13,8 @@ git add -A
 git commit -m 'deploy'
 
 # f - forse!!!!!!!!!
-git push -f git@github.com:K4maS/coin-practice.git  master:gh-pages
+git push -f git@github.com:K4maS/coin-practice-page.git  master:gh-pages
 
 cd -
 
-# https://k4mas.github.io/practic-sit-down-please/
+# https://k4mas.github.io/coin-practice-page/

@@ -1,7 +1,8 @@
 const HtmlWibpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlagin = require('mini-css-extract-plugin')
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+// const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+// import publicPath from './src/js/publicPath';
 
 // eslint-disable-next-line no-undef
 module.exports = (env) => ({
@@ -94,7 +95,7 @@ module.exports = (env) => ({
     new MiniCssExtractPlagin({
       filename: 'main.[contenthash].css',
     }),
-    new FaviconsWebpackPlugin('./src/assets/images/favicon.ico'),
+    // new FaviconsWebpackPlugin('./favicon.ico'),
   ],
   // настройки сервера
   devServer: {

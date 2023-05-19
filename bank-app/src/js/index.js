@@ -8,7 +8,7 @@ import accountsList from './accountsList';
 import createAtms from './atms';
 import createСurrency from './currency';
 import createAccoutn from './account';
-import { accountAddress, accountsListAddress, atmAddress, balanceHistoryAddress, currencyAddress } from './addresses';
+import { accountAddress, accountsListAddress, atmAddress, balanceHistoryAddress, currencyAddress, loginAddress } from './addresses';
 import createHistory from './history';
 
 
